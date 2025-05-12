@@ -1,4 +1,4 @@
-pymysql
+mysql-connector-python
 pandas
 boto3
-cryptography
+
