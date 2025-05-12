@@ -8,7 +8,7 @@ db_config = {
     'user': 'root',
     'password': 'utec',
     'database': 'peliculas_db',
-    'port':'8005'
+    'port':8005
 }
 
 # --- Parámetros ---
