@@ -1,3 +1,4 @@
 pymysql
 pandas
 boto3
+cryptography
