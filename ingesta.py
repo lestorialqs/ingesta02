@@ -1,14 +1,14 @@
-import pymysql
+import mysql.connector
 import pandas as pd
 import boto3
 
 # --- Configuración de la base de datos MySQL ---
 db_config = {
-    'host': '172.31.28.118',
+    'host': '172.31.28.118',  # IP privada de la base de datos
     'user': 'root',
     'password': 'utec',
     'database': 'peliculas_db',
-    'port':8005
+    'port': 8005  # El puerto que estás usando para la conexión
 }
 
 # --- Parámetros ---
@@ -18,7 +18,7 @@ bucket_s3 = 'peliculas-bucket'
 
 # --- Conectar a MySQL y leer datos ---
 try:
-    conexion = pymysql.connect(**db_config)
+    conexion = mysql.connector.connect(**db_config)
     consulta = f"SELECT * FROM {tabla}"
     df = pd.read_sql(consulta, conexion)
     conexion.close()
