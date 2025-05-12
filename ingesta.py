@@ -4,10 +4,11 @@ import boto3
 
 # --- Configuración de la base de datos MySQL ---
 db_config = {
-    'host': '172.31.28.118:8005',
+    'host': '172.31.28.118',
     'user': 'root',
     'password': 'utec',
-    'database': 'peliculas_db'
+    'database': 'peliculas_db',
+    'port':'8005'
 }
 
 # --- Parámetros ---
