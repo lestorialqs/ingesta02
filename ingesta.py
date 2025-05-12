@@ -19,13 +19,27 @@ bucket_s3 = 'peliculas-bucket'
 # --- Conectar a MySQL y leer datos ---
 try:
     conexion = mysql.connector.connect(**db_config)
+    cursor = conexion.cursor()
+
+    # Realizar la consulta SQL para obtener los datos
     consulta = f"SELECT * FROM {tabla}"
-    df = pd.read_sql(consulta, conexion)
+    cursor.execute(consulta)
+
+    # Obtener los resultados y los nombres de las columnas
+    columnas = [desc[0] for desc in cursor.description]
+    resultados = cursor.fetchall()
+
+    # Convertir los resultados a un DataFrame de pandas
+    df = pd.DataFrame(resultados, columns=columnas)
+    
+    # Cerrar el cursor y la conexión
+    cursor.close()
     conexion.close()
 
-    # Guardar como CSV
+    # Guardar los datos en un archivo CSV
     df.to_csv(archivo_csv, index=False)
     print(f"Datos exportados a {archivo_csv}")
+
 except Exception as e:
     print("Error al consultar la base de datos:", e)
     exit(1)
@@ -37,3 +51,4 @@ try:
     print("Archivo subido a S3 exitosamente.")
 except Exception as e:
     print("Error al subir a S3:", e)
+
